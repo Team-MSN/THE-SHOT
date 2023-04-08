@@ -4,6 +4,7 @@ public class move : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 3.0f;
+    public float rotation = 1.5f;
 
     void Stop() //停止
     {
@@ -13,12 +14,12 @@ public class move : MonoBehaviour
 
     void rightRotate() //右回転
     {
-        rb.angularVelocity = transform.up * speed;
+        rb.angularVelocity = transform.up * rotation;
     }
 
     void leftRotate() //左回転
     {
-        rb.angularVelocity = -transform.up * speed;
+        rb.angularVelocity = -transform.up * rotation;
     }
 
     void Go() //前進
