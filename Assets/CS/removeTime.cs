@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class removeTime : MonoBehaviour
 {
-    public int removeCount = 300;
+    public int removeCount = 1000;
 
     void Start() { }
 

@@ -51,7 +51,6 @@ public class bullet : MonoBehaviour
         UpdateLastDirection();
     }
 
-
     private void Init()
     {
         // isTrigger=false で使用する場合はContinuous Dynamicsに設定
@@ -184,6 +183,12 @@ public class bullet : MonoBehaviour
             var nextMoveDistance = velocity.magnitude * Time.fixedDeltaTime;
             if (distance <= nextMoveDistance)
             {
+                //もし弾丸だったら
+                if (hitInfo.collider.tag == "bullet")
+                {
+                    Destroy(gameObject);
+                }
+
                 // 次フレームに使う反射速度を計算
                 var normal = hitInfo.normal;
                 var inVecDir = direction;
