@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class move : MonoBehaviour
 {
-    Rigidbody rb;
     public float speed;
     public float rotation;
+    public int stopCount = 30;
+    public int moveStopCount = 15;
+    public GameObject bullet;
+    public Transform barrel;
+
+    private Rigidbody rb;
+    private int stopTime;
 
     void Stop() //停止
     {
@@ -71,6 +77,14 @@ public class move : MonoBehaviour
 
     void FixedUpdate() // 常時実行
     {
+        if (stopTime > 0)
+            stopTime--;
+
+        if (stopTime > moveStopCount)
+        {
+            return;
+        }
+
         // Aキー
         if (Input.GetKey(KeyCode.A))
         {
@@ -100,5 +114,20 @@ public class move : MonoBehaviour
             return;
         }
         Move();
+    }
+
+    void Update() // 常時実行
+    {
+        if (stopTime > 0)
+            return;
+
+        // 右クリック
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameObject obj = Instantiate(bullet, barrel.position, barrel.rotation);
+            obj.SetActive(true);
+            stopTime = stopCount;
+            //ps.Emit(new ParticleSystem.EmitParams(), 1);
+        }
     }
 }

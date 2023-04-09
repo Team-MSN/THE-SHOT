@@ -23,6 +23,11 @@ public class bullet : MonoBehaviour
     private Vector3 lastDirection;
     private bool canKeepSpeed;
 
+    //-----
+    private bool remove = false;
+
+    //-----
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +43,14 @@ public class bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //-----
+        if (remove)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        //-----
+
         // 重なりを解消
         OverlapDetection();
 
@@ -186,7 +199,7 @@ public class bullet : MonoBehaviour
                 //もし弾丸だったら
                 if (hitInfo.collider.tag == "bullet")
                 {
-                    Destroy(gameObject);
+                    remove = true;
                 }
 
                 // 次フレームに使う反射速度を計算
